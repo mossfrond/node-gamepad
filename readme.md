@@ -1,4 +1,5 @@
 Fork of node-gamepad.
+Primarly updated to allow complete logitech/dualaction functionality. Other controller untested with changes.
 
 ### Supported Controllers
 
