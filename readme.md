@@ -1,12 +1,4 @@
-# node-gamepad
-
-> node-gamepad is a package for node that allows you to effortlessly interface your node applications with a variety of gamepad controllers.
-
-## Installation
-
-```js
-npm install node-gamepad
-```
+Fork of node-gamepad.
 
 ### Supported Controllers
 
@@ -28,15 +20,36 @@ Plug in a supported controller and run a variation of the code below (with an ac
 
 ```js
 var GamePad = require( 'node-gamepad' );
-var controller = new GamePad( 'supported/controller/here' );
+var controller = new GamePad( 'logitech/dualaction' );
 controller.connect();
 
-controller.on( 'up:press', function() {
-    console.log( 'up' );
+controller.on( 'left:move', function(data) {
+    console.log( 'left', data.x,data.y );
 } );
-controller.on( 'down:press', function() {
-    console.log( 'down' );
+
+controller.on( 'right:move', function(data) {
+    console.log( 'right', data.x,data.y );
 } );
+
+["1", "2", "3", "4", "5", "6", "7", "8", "9", "10",'L','R' ].forEach(function(button) {
+    controller.on(button + ":press", function() {
+      console.log("Button " + button + " pressed.");
+    });
+});
+
+["1", "2", "3", "4", "5", "6", "7", "8", "9", "10",'L','R' ].forEach(function(button) {
+    controller.on(button + ":release", function() {
+      console.log("Button " + button + " released.");
+    });
+});
+
+
+controller.on('hat:change', function(data){
+	console.log ("Hat: " + data);
+});
+
+
+
 ```
 
 If you want to use the same configuration for another controller but the vendorID and/or productID is different that the one included in the existing controller dictionary, you can simply pass in an optional second parameter when instantiating the new `GamePad` object:
