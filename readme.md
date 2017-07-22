@@ -1,5 +1,5 @@
-Fork of node-gamepad.
-Primarly updated to allow complete logitech/dualaction functionality. Other controller untested with changes.
+Fork of carldanley/node-gamepad.
+Primarly updated to allow complete logitech/dualaction functionality. Other controllers untested with changes.
 
 ### Supported Controllers
 
