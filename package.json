@@ -2,11 +2,11 @@
   "name": "node-gamepad-nibble",
   "description": "node-gamepad-nibble is a package for node that allows you to effortlessly interface your node applications with a variety of gamepad controllers.",
   "version": "0.1.15",
-  "homepage": "https://github.com/mossfrond/node-gamepad",
+  "homepage": "https://github.com/mossfrond/node-gamepad-nibble",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:mossfrond/node-gamepad.git"
+    "url": "git@github.com:mossfrond/node-gamepad-nibble.git"
   },
   "author": {
     "name": "Carl Danley",
@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mossfrond/node-gamepad/issues"
+    "url": "https://github.com/mossfrond/node-gamepad-nibble/issues"
   },
   "engines": {
     "node": ">= 0.10.28"
