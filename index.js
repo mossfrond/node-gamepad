@@ -154,6 +154,7 @@ Gamepad.prototype.connect = function() {
 };
 
 Gamepad.prototype._onControllerFrame = function( data ) {
+    //console.log(data);
     this._processJoysticks( data );
     this._processButtons( data );
     this._processStatus( data );
@@ -195,7 +196,8 @@ Gamepad.prototype._processButtons = function( data ) {
     var buttons = this._config.buttons, button, isPressed, currentState;
     for( var i = 0, len = buttons.length; i < len; i ++ ) {
         button = buttons[ i ];
-        isPressed = ( data[ button.pin ] & 0xff ) === button.value;
+        //isPressed = ( data[ button.pin ] & 0xff ) === button.value;
+        isPressed = ( (data[ button.pin ] & 0xff ) & button.value) == button.value;
         if( this._states[ button.name ] === undefined ) {
             this._states[ button.name ] = isPressed;
 
@@ -226,11 +228,15 @@ Gamepad.prototype._processStatus = function( data ) {
     var currentState;
     for( var i = 0, len = statuses.length; i < len; i++ ) {
         status = statuses[ i ];
-        state = data[ status.pin ] & 0xff;
+        var j;
+	var length;
+        //state = data[ status.pin ] & 0xff;
+	if (! status.mask) status.mask = 0xff;
+	state = data[ status.pin ] & status.mask;
         states = status.states;
 
-        for( var j = 0, length = states.length; j < length; j++ ) {
-            if( states[ j ].value === state ) {
+        for( j = 0, length = states.length; j < length; j++ ) {
+            if( states[ j ].value  === state )  {
                 state = states[ j ].state;
                 break;
             }
@@ -238,6 +244,7 @@ Gamepad.prototype._processStatus = function( data ) {
 
         currentState = this._states[ status.name ];
         if( currentState !== state ) {
+            
             this.emit( status.name + ':change', state );
         }
 
@@ -247,6 +254,6 @@ Gamepad.prototype._processStatus = function( data ) {
 
 Gamepad.prototype.disconnect = function() {
     if( this._usb ) {
-        this._usb.close();
+        this._usb.disconnect();
     }
 };
